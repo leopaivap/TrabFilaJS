@@ -14,7 +14,7 @@
   ul {
 	list-style: none;
 	padding: 0;
-	margin-top: 20px;
+	
 }
 
 li {
@@ -26,4 +26,24 @@ li {
 
 li:hover {
     background-color: #e2e2e2;
+}
+
+.fila-item {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.fila-item-escuro {
+  background-color: #0f3967;
+  color: #ffffff;
+}
+
+.fila-item-claro {
+  background-color: #cccccc;
+  color: #000000;
+}
+
+.title-style{
+  background-color: #063970;
+  color: #ffffff;
 }

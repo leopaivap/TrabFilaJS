@@ -44,16 +44,24 @@ function realizarAtendimento() {
 
 }
 //--------------------------------------------------------------------------------
+
 function buscarCpf() {
    const cpf = document.getElementById("txtNovoCpf").value.trim(); // o trim retira os espaços em branco
-   const atendimento = new Atendimento(null, cpf); // vamos pesquisar só por CPF
-   // para cada elemento da fila, verificar com o equals
+   let atendimento = new Atendimento(); // vamos pesquisar só por CPF
+
    // Deve retornar a posição na fila e caso não seja encontrado avisar, crie um contador de posicões
-   for (let item of minhaFila.items) { // para cada elemento da fila
-      if (item.equals(atendimento))
-         alert("Achou! Posição: ");
+   let cont = 0;
+
+   for (let [key, item] of Object.entries(minhaFila.itens)) { // para cada elemento da fila
+      atendimento.cpf = cpf
+      cont++;
+      console.log(cont);
+      if (item.equals(atendimento)) {   // para cada elemento da fila, verificar com o equals
+         alert("Achou! Posição: " + cont);
+         return;
+      }
    }
-   // se nao encontrar mostre mensagem
+   alert("CPF não encontrado!"); // se nao encontrar mostre mensagem
 }
 //--------------------------------------------------------------------------------------------
 function mostrarMensagemRemocao(pessoaAtendida) {
@@ -64,8 +72,32 @@ function mostrarMensagemRemocao(pessoaAtendida) {
 //--------------------------------------------------------------------------------------------
 // Função para mostrar a  fila
 function mostrarFila() {
+   const filaElemento = document.getElementById("listPessoasFila");
+   filaElemento.textContent = minhaFila.toString();
+   filaElemento.innerHTML = "";
 
-   
+   let contador = 0;
+   for (let item of minhaFila.itens) {
+      contador++;
+      const itemElement = document.createElement("ul");
+      itemElement.classList.add("fila-item");
+      itemElement.innerText = item.toString();
+      filaElemento.appendChild(itemElement);
+
+      // alterna as cores de fundo entre as linhas
+      if (filaElemento.children.length % 2 == 0)
+         itemElement.classList.add("fila-item-claro");
+      else
+         itemElement.classList.add("fila-item-escuro");
+   }
+
+   if (contador == 0) {
+      pessoasFila.innerHTML = "Fila Vazia!"
+      pessoasFila.style.display = "block";
+   } else
+      pessoasFila.innerHTML = "";
+
+
    if (minhaFila.itens[0] != null)
       mostrarMensagemRemocao(minhaFila.itens[0]);
    else {
