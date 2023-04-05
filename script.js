@@ -52,7 +52,7 @@ function buscarCpf() {
    // Deve retornar a posição na fila e caso não seja encontrado avisar, crie um contador de posicões
    let cont = 0;
 
-   for (let [key, item] of Object.entries(minhaFila.itens)) { // para cada elemento da fila
+   for (let item of minhaFila.itens) { // para cada elemento da fila
       atendimento.cpf = cpf
       cont++;
       console.log(cont);
